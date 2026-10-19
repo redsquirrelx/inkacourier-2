@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Destino "registro_recepcion" (vistas/registro-recepcion.html). HU-03 y sección
+     condicional de cobro de HU-04 (DEC-NAV-01/D6). -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/md_surface"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/barra"
+        layout="@layout/view_barra" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout style="@style/Contenido.Pagina">
+
+            <TextView
+                android:id="@+id/txtPedido"
+                style="@style/Texto.Overline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Pedido IC-1001" />
+
+            <TextView
+                android:id="@+id/txtTipoPedido"
+                style="@style/Texto.Soporte"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="@string/pedido_sin_cobro" />
+
+            <!-- HU-04: verificación del cobro -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardCobro"
+                style="@style/Tarjeta">
+
+                <LinearLayout style="@style/Tarjeta.Contenido">
+
+                    <TextView
+                        style="@style/Texto.Seccion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/verificacion_cobro" />
+
+                    <TextView
+                        android:id="@+id/txtImporte"
+                        style="@style/Texto.Importe"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="S/ 128.50" />
+
+                    <TextView
+                        style="@style/Texto.Soporte"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/importe_exacto_cuenta" />
+
+                    <com.google.android.material.button.MaterialButtonToggleGroup
+                        android:id="@+id/grupoMedioPago"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:selectionRequired="true"
+                        app:singleSelection="true">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnEfectivo"
+                            style="@style/Widget.InkaCourier.Segmento"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/efectivo" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnYape"
+                            style="@style/Widget.InkaCourier.Segmento"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/yape" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnPlin"
+                            style="@style/Widget.InkaCourier.Segmento"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/plin" />
+                    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+                    <!-- HU-04/CA-01: efectivo -->
+                    <LinearLayout
+                        android:id="@+id/seccionEfectivo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.checkbox.MaterialCheckBox
+                            android:id="@+id/chkImporteExacto"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/importe_exacto_verificado" />
+
+                        <TextView
+                            style="@style/Texto.Soporte"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/registro_unico" />
+                    </LinearLayout>
+
+                    <!-- HU-04/CA-02: Yape o Plin -->
+                    <LinearLayout
+                        android:id="@+id/seccionDigital"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/codigo_operacion">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/edtCodigoOperacion"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="textCapCharacters|textNoSuggestions" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.checkbox.MaterialCheckBox
+                            android:id="@+id/chkOperacionObservada"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/operacion_observada" />
+
+                        <com.google.android.material.checkbox.MaterialCheckBox
+                            android:id="@+id/chkConfirmacionDespacho"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/confirmacion_despacho" />
+
+                        <include
+                            android:id="@+id/avisoConfirmacion"
+                            layout="@layout/view_aviso"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- HU-03: identidad del receptor (RF-07) -->
+            <com.google.android.material.card.MaterialCardView style="@style/Tarjeta">
+
+                <LinearLayout style="@style/Tarjeta.Contenido">
+
+                    <TextView
+                        style="@style/Texto.Seccion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/identidad_receptor" />
+
+                    <com.google.android.material.button.MaterialButtonToggleGroup
+                        android:id="@+id/grupoTipoReceptor"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:checkedButton="@id/btnTitular"
+                        app:selectionRequired="true"
+                        app:singleSelection="true">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnTitular"
+                            style="@style/Widget.InkaCourier.Segmento"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/titular" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnTercero"
+                            style="@style/Widget.InkaCourier.Segmento"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/tercero_autorizado" />
+                    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+                    <TextView
+                        android:id="@+id/txtTerceroNoAdmitido"
+                        style="@style/Texto.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tercero_no_admitido"
+                        android:textColor="@color/md_error" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/nombre_receptor">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtNombreReceptor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPersonName|textCapWords" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.InkaCourier.CampoTexto.Desplegable"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/tipo_documento">
+
+                        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                            android:id="@+id/selTipoDocumento"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="none" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/numero_documento">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtNumeroDocumento"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textCapCharacters|textNoSuggestions" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/chkIdentidadVerificada"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/identidad_verificada" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- HU-03/CA-02, HU-04/CA-03: autorización del remitente (RF-11) -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardAutorizacion"
+                style="@style/Tarjeta">
+
+                <LinearLayout style="@style/Tarjeta.Contenido">
+
+                    <TextView
+                        style="@style/Texto.Seccion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/autorizacion_remitente" />
+
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/chkAutorizacionComprobada"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/autorizacion_comprobada" />
+
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/chkRecepcionPermitida"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/recepcion_permitida" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Evidencias: firma (RF-08) y fotografía de fachada (RF-09) -->
+            <com.google.android.material.card.MaterialCardView style="@style/Tarjeta">
+
+                <LinearLayout style="@style/Tarjeta.Contenido">
+
+                    <TextView
+                        style="@style/Texto.Seccion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/evidencias_recepcion" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/Texto.Subtitulo"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/firma_receptor" />
+
+                        <TextView
+                            android:id="@+id/txtEstadoFirma"
+                            style="@style/Texto.Insignia"
+                            tools:text="Pendiente" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/imgFirma"
+                        android:layout_width="match_parent"
+                        android:layout_height="88dp"
+                        android:background="@drawable/fondo_imagen"
+                        android:contentDescription="@string/firma_receptor"
+                        android:padding="2dp"
+                        android:scaleType="fitCenter" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnCapturarFirma"
+                        style="@style/Widget.InkaCourier.Boton.Contorno"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/capturar_firma" />
+
+                    <LinearLayout
+                        android:id="@+id/seccionFotografia"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:divider="@drawable/espacio_12"
+                        android:orientation="vertical"
+                        android:showDividers="middle">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/md_outline_variant" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/Texto.Subtitulo"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/fotografia_fachada" />
+
+                            <TextView
+                                android:id="@+id/txtEstadoFotografia"
+                                style="@style/Texto.Insignia"
+                                tools:text="Pendiente" />
+                        </LinearLayout>
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/imgFotografia"
+                            app:shapeAppearanceOverlay="@style/Forma.Imagen"
+                            android:layout_width="match_parent"
+                            android:layout_height="144dp"
+                            android:contentDescription="@string/fotografia_fachada"
+                            android:scaleType="centerCrop" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnTomarFotografia"
+                            style="@style/Widget.InkaCourier.Boton.Contorno"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tomar_fotografia" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- HU-03/CA-03: excepción de seguridad (RF-15) -->
+            <include
+                android:id="@+id/excepcion"
+                layout="@layout/view_excepcion_formulario" />
+
+            <include
+                android:id="@+id/fechaUbicacion"
+                layout="@layout/view_fecha_ubicacion" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout style="@style/Acciones">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnGuardarRecepcion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/registrar_recepcion" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCancelar"
+            style="@style/Widget.InkaCourier.Boton.Texto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cancelar" />
+    </LinearLayout>
+</LinearLayout>

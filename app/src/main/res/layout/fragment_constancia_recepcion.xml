@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Destino "constancia_recepcion" (vistas/constancia-recepcion.html; RF-14). Solo lectura. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/md_surface"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/barra"
+        layout="@layout/view_barra" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout style="@style/Contenido.Pagina">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp">
+
+                <ImageView
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@drawable/fondo_marca_constancia"
+                    android:importantForAccessibility="no"
+                    android:padding="16dp"
+                    android:src="@drawable/ic_check"
+                    app:tint="@color/md_success" />
+
+                <TextView
+                    android:id="@+id/txtPedido"
+                    style="@style/Texto.Overline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    tools:text="Pedido IC-1001" />
+
+                <TextView
+                    android:id="@+id/txtResultado"
+                    style="@style/Texto.Seccion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    tools:text="Entregado al titular" />
+
+                <TextView
+                    style="@style/Texto.Soporte"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/constancia_registrada" />
+            </LinearLayout>
+
+            <com.google.android.material.card.MaterialCardView style="@style/Tarjeta">
+
+                <LinearLayout
+                    android:id="@+id/contenedorIdentidad"
+                    style="@style/Tarjeta.Contenido">
+
+                    <TextView
+                        style="@style/Texto.Seccion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/identidad_receptor" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardAutorizacion"
+                style="@style/Tarjeta">
+
+                <LinearLayout
+                    android:id="@+id/contenedorAutorizacion"
+                    style="@style/Tarjeta.Contenido">
+
+                    <TextView
+                        style="@style/Texto.Seccion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/autorizacion_remitente" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardCobro"
+                style="@style/Tarjeta.Tonal">
+
+                <LinearLayout
+                    android:id="@+id/contenedorCobro"
+                    style="@style/Tarjeta.Contenido">
+
+                    <TextView
+                        style="@style/Texto.Seccion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cobro_registrado" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView style="@style/Tarjeta">
+
+                <LinearLayout style="@style/Tarjeta.Contenido">
+
+                    <TextView
+                        style="@style/Texto.Seccion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/firma_receptor" />
+
+                    <ImageView
+                        android:id="@+id/imgFirma"
+                        android:layout_width="match_parent"
+                        android:layout_height="88dp"
+                        android:background="@drawable/fondo_imagen"
+                        android:contentDescription="@string/firma_receptor"
+                        android:padding="2dp"
+                        android:scaleType="fitCenter" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardFotografia"
+                style="@style/Tarjeta">
+
+                <LinearLayout style="@style/Tarjeta.Contenido">
+
+                    <TextView
+                        style="@style/Texto.Seccion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fotografia_fachada" />
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/imgFotografia"
+                        app:shapeAppearanceOverlay="@style/Forma.Imagen"
+                        android:layout_width="match_parent"
+                        android:layout_height="144dp"
+                        android:contentDescription="@string/fotografia_fachada"
+                        android:scaleType="centerCrop" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <include
+                android:id="@+id/excepcion"
+                layout="@layout/view_excepcion_seguridad" />
+
+            <include
+                android:id="@+id/fechaUbicacion"
+                layout="@layout/view_fecha_ubicacion" />
+
+            <TextView
+                style="@style/Texto.Caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/solo_lectura" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

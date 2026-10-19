@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Tarjeta "Fecha y ubicación" compartida por recepción, visita fallida y constancia (RF-10, RF-17). -->
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/Tarjeta">
+
+    <LinearLayout style="@style/Tarjeta.Contenido">
+
+        <TextView
+            style="@style/Texto.Seccion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fecha_y_ubicacion" />
+
+        <include
+            android:id="@+id/datoUbicacion"
+            layout="@layout/view_dato_icono" />
+
+        <include
+            android:id="@+id/datoFecha"
+            layout="@layout/view_dato_icono" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

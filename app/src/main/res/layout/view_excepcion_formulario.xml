@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Excepción de seguridad editable, compartida por recepción (HU-03/CA-03) y visita fallida (HU-05/CA-05). -->
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/Tarjeta">
+
+    <LinearLayout style="@style/Tarjeta.Contenido">
+
+        <TextView
+            style="@style/Texto.Seccion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/excepcion_seguridad" />
+
+        <include
+            android:id="@+id/avisoExoneracion"
+            layout="@layout/view_aviso" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/sector_catalogado">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtSectorRiesgo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.InkaCourier.CampoTexto.Desplegable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/motivo_tipificado"
+            app:helperText="@string/ayuda_motivo_exoneracion"
+            xmlns:app="http://schemas.android.com/apk/res-auto">
+
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/selMotivoExoneracion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/nota_seguridad">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtNotaSeguridad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine|textCapSentences" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

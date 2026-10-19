@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Destino "registro_visita_fallida" (vistas/visita-fallida.html; HU-05). -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/md_surface"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/barra"
+        layout="@layout/view_barra" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout style="@style/Contenido.Pagina">
+
+            <TextView
+                android:id="@+id/txtPedido"
+                style="@style/Texto.Overline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Pedido IC-1001" />
+
+            <TextView
+                style="@style/Texto.Soporte"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/documenta_intento" />
+
+            <!-- HU-05/CA-01: contacto en curso y plazo de ausencia -->
+            <include
+                android:id="@+id/avisoContactoEnCurso"
+                layout="@layout/view_aviso" />
+
+            <include
+                android:id="@+id/avisoAusenciaNoHabilitada"
+                layout="@layout/view_aviso" />
+
+            <com.google.android.material.card.MaterialCardView style="@style/Tarjeta">
+
+                <LinearLayout style="@style/Tarjeta.Contenido">
+
+                    <TextView
+                        style="@style/Texto.Seccion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/resultado_intento" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.InkaCourier.CampoTexto.Desplegable"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/causa_visita_fallida">
+
+                        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                            android:id="@+id/selCausa"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="none" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/observaciones">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtObservaciones"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="top"
+                            android:inputType="textMultiLine|textCapSentences"
+                            android:minLines="3" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- HU-05/CA-04 -->
+                    <include
+                        android:id="@+id/avisoPagoNoVerificado"
+                        layout="@layout/view_aviso" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- HU-05/CA-01: contexto de contacto (RF-18) -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardContacto"
+                style="@style/Tarjeta">
+
+                <LinearLayout style="@style/Tarjeta.Contenido">
+
+                    <TextView
+                        style="@style/Texto.Seccion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/contexto_contacto" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/llegada_domicilio"
+                        app:endIconDrawable="@drawable/ic_reloj"
+                        app:endIconMode="custom">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtLlegada"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="false"
+                            android:inputType="none" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/gestion_contacto"
+                        app:endIconDrawable="@drawable/ic_reloj"
+                        app:endIconMode="custom">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtContacto"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="false"
+                            android:inputType="none" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.InkaCourier.CampoTexto.Desplegable"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/continua_sin_respuesta">
+
+                        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                            android:id="@+id/selSinRespuesta"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="none" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.InkaCourier.CampoTexto.Desplegable"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/extension_autorizada">
+
+                        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                            android:id="@+id/selExtension"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="none" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        style="@style/Texto.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ayuda_contacto" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- HU-05/CA-03: recepción rechazada (RF-20) -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardRechazo"
+                style="@style/Tarjeta">
+
+                <LinearLayout style="@style/Tarjeta.Contenido">
+
+                    <TextView
+                        style="@style/Texto.Seccion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/recepcion_rechazada" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.InkaCourier.CampoTexto.Desplegable"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/motivo_comunicado"
+                        app:helperText="@string/ayuda_motivo_rechazo">
+
+                        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                            android:id="@+id/selMotivoRechazo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="none" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/constancias_aplicables">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtConstancias"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textMultiLine|textCapSentences" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- HU-05/CA-05: excepción de seguridad (RF-22) -->
+            <include
+                android:id="@+id/excepcion"
+                layout="@layout/view_excepcion_formulario" />
+
+            <!-- Respaldo del intento: formato pendiente de dominio (UI-D13) -->
+            <com.google.android.material.card.MaterialCardView style="@style/Tarjeta">
+
+                <LinearLayout style="@style/Tarjeta.Contenido">
+
+                    <TextView
+                        style="@style/Texto.Seccion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/respaldo_intento" />
+
+                    <TextView
+                        android:id="@+id/txtRespaldo"
+                        style="@style/Texto.Soporte"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/fondo_respaldo"
+                        android:padding="16dp"
+                        android:text="@string/respaldo_vacio" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <include
+                android:id="@+id/fechaUbicacion"
+                layout="@layout/view_fecha_ubicacion" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout style="@style/Acciones">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRegistrar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/registrar" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCancelar"
+            style="@style/Widget.InkaCourier.Boton.Texto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cancelar" />
+    </LinearLayout>
+</LinearLayout>

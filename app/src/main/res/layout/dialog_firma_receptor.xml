@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Destino "captura_firma" (vistas/firma-receptor.html; RF-08, DEC-NAV-01/D4). -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:divider="@drawable/espacio_16"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:showDividers="middle">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="12dp"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_firma"
+            app:tint="@color/md_on_surface" />
+
+        <TextView
+            style="@style/Texto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/firma_receptor"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtReceptor"
+        style="@style/Texto.Soporte"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="María Rojas · DNI 00000000" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:background="@drawable/fondo_area_firma">
+
+        <TextView
+            android:id="@+id/txtIndicacion"
+            style="@style/Texto.Soporte"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/firma_dentro_area" />
+
+        <com.dapm.inkacourier_app.vistas.FirmaView
+            android:id="@+id/firmaView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/area_firma" />
+    </FrameLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnBorrarFirma"
+        style="@style/Widget.InkaCourier.Boton.Texto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/borrar_trazos" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCancelarFirma"
+            style="@style/Widget.InkaCourier.Boton.Texto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:text="@string/cancelar" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnConfirmarFirma"
+            style="@style/Widget.InkaCourier.Boton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:text="@string/confirmar_firma" />
+    </LinearLayout>
+</LinearLayout>

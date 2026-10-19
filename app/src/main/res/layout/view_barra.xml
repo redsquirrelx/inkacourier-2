@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Barra superior compartida (.toolbar): volver o marca, "INKACOURIER" y título. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/fondo_barra"
+    android:gravity="center_vertical"
+    android:minHeight="64dp"
+    android:orientation="horizontal"
+    android:paddingStart="8dp"
+    android:paddingTop="8dp"
+    android:paddingEnd="16dp"
+    android:paddingBottom="8dp">
+
+    <ImageButton
+        android:id="@+id/btnVolver"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/volver"
+        android:src="@drawable/ic_volver"
+        app:tint="@color/md_on_surface" />
+
+    <ImageView
+        android:id="@+id/imgMarca"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/fondo_marca"
+        android:importantForAccessibility="no"
+        android:padding="8dp"
+        android:src="@drawable/ic_paquete"
+        android:visibility="gone"
+        app:tint="@color/md_on_primary" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/Texto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:letterSpacing="0.06"
+            android:text="@string/marca"
+            android:textColor="@color/md_primary"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/txtTitulo"
+            style="@style/Texto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="22sp"
+            tools:text="Detalle de parada" />
+    </LinearLayout>
+</LinearLayout>

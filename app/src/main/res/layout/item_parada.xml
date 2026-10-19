@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Fila de la lista de paradas (.stop). -->
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Tarjeta"
+    android:layout_marginBottom="12dp"
+    android:clickable="true"
+    android:focusable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/txtNumero"
+            style="@style/Texto"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="12dp"
+            android:background="@drawable/fondo_numero"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:textSize="14sp"
+            tools:text="01" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtPedido"
+                style="@style/Texto.Caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Pedido IC-1001" />
+
+            <TextView
+                android:id="@+id/txtDestinatario"
+                style="@style/Texto.Subtitulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                tools:text="María Rojas" />
+
+            <TextView
+                android:id="@+id/txtDomicilio"
+                style="@style/Texto.Soporte"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                tools:text="Av. Los Olivos 245" />
+
+            <TextView
+                android:id="@+id/txtVentana"
+                style="@style/Texto.Caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="09:00 – 12:00" />
+
+            <TextView
+                android:id="@+id/txtEstado"
+                style="@style/Texto.Insignia"
+                android:layout_marginTop="12dp"
+                tools:text="Pendiente" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="6dp"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_chevron"
+            app:tint="@color/md_on_surface" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

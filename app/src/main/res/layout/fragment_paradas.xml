@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Destino "paradas" (vistas/paradas.html; HU-01/CA-01, CA-04, CA-05).
+     La cabecera y la lista se desplazan juntas, como .page-content del diseño. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/md_surface"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/barra"
+        layout="@layout/view_barra" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout style="@style/Contenido.Pagina">
+
+            <include
+                android:id="@+id/avisoSinConexion"
+                layout="@layout/view_aviso" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@drawable/espacio_12"
+                android:orientation="vertical"
+                android:showDividers="middle">
+
+                <TextView
+                    style="@style/Texto.Overline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ruta_asignada" />
+
+                <TextView
+                    style="@style/Texto.Seccion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tu_jornada" />
+
+                <TextView
+                    android:id="@+id/txtFechaJornada"
+                    style="@style/Texto.Soporte"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="16 de octubre · Lima" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/Texto.Subtitulo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/paradas_de_hoy" />
+
+                <TextView
+                    android:id="@+id/txtCantidad"
+                    style="@style/Texto.Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="8 asignaciones" />
+            </LinearLayout>
+
+            <!-- rvParadas: el desplazamiento lo realiza la página completa. -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvParadas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                tools:listitem="@layout/item_parada" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

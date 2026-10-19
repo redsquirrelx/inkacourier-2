@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Destino "detalle_parada" (vistas/detalle-parada.html). Muestra los datos de HU-01
+     y los resultados guardados de HU-03, HU-04 y HU-05. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/md_surface"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/barra"
+        layout="@layout/view_barra" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout style="@style/Contenido.Pagina">
+
+            <include
+                android:id="@+id/avisoSinConexion"
+                layout="@layout/view_aviso" />
+
+            <include
+                android:id="@+id/avisoResultado"
+                layout="@layout/view_aviso" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txtPedido"
+                    style="@style/Texto.Overline"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    tools:text="Pedido IC-1001" />
+
+                <TextView
+                    android:id="@+id/txtEstado"
+                    style="@style/Texto.Insignia"
+                    tools:text="Pendiente" />
+            </LinearLayout>
+
+            <com.google.android.material.card.MaterialCardView style="@style/Tarjeta">
+
+                <LinearLayout style="@style/Tarjeta.Contenido">
+
+                    <TextView
+                        style="@style/Texto.Seccion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/destino_entrega" />
+
+                    <include
+                        android:id="@+id/datoDestinatario"
+                        layout="@layout/view_dato_icono" />
+
+                    <include
+                        android:id="@+id/datoDomicilio"
+                        layout="@layout/view_dato_icono" />
+
+                    <include
+                        android:id="@+id/datoContacto"
+                        layout="@layout/view_dato_icono" />
+
+                    <include
+                        android:id="@+id/datoVentana"
+                        layout="@layout/view_dato_icono" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- HU-01/CA-02: referencias diferenciadas del domicilio registrado -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardReferencias"
+                style="@style/Tarjeta.Tonal">
+
+                <LinearLayout style="@style/Tarjeta.Contenido">
+
+                    <TextView
+                        style="@style/Texto.Seccion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/referencias_acceso" />
+
+                    <TextView
+                        android:id="@+id/txtReferencias"
+                        style="@style/Texto.Soporte"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:text="Portón verde. Interior 2, timbre del lado derecho." />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- HU-01/CA-03: importe exacto y medios autorizados -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardContraentrega"
+                style="@style/Tarjeta.Tonal">
+
+                <LinearLayout style="@style/Tarjeta.Contenido">
+
+                    <TextView
+                        style="@style/Texto.Seccion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/contraentrega" />
+
+                    <TextView
+                        android:id="@+id/txtImporte"
+                        style="@style/Texto.Importe"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="S/ 128.50" />
+
+                    <TextView
+                        style="@style/Texto.Soporte"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/importe_exacto_pedido" />
+
+                    <include
+                        android:id="@+id/filaMedios"
+                        layout="@layout/item_fila_dato" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- HU-03: recepción registrada -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardRecepcion"
+                style="@style/Tarjeta">
+
+                <LinearLayout
+                    android:id="@+id/contenedorRecepcion"
+                    style="@style/Tarjeta.Contenido">
+
+                    <TextView
+                        style="@style/Texto.Seccion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/recepcion" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- HU-04: cobro registrado -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardCobro"
+                style="@style/Tarjeta.Tonal">
+
+                <LinearLayout
+                    android:id="@+id/contenedorCobro"
+                    style="@style/Tarjeta.Contenido">
+
+                    <TextView
+                        style="@style/Texto.Seccion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cobro_registrado" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- HU-05: resultado de la visita -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardVisita"
+                style="@style/Tarjeta">
+
+                <LinearLayout
+                    android:id="@+id/contenedorVisita"
+                    style="@style/Tarjeta.Contenido">
+
+                    <TextView
+                        style="@style/Texto.Seccion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/resultado_visita" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <include
+                android:id="@+id/avisoVisitaRealizada"
+                layout="@layout/view_aviso" />
+
+            <include
+                android:id="@+id/excepcion"
+                layout="@layout/view_excepcion_seguridad" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/acciones"
+        style="@style/Acciones">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRegistrarRecepcion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/registrar_recepcion" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRegistrarVisitaFallida"
+            style="@style/Widget.InkaCourier.Boton.Contorno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/registrar_visita_fallida" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnVerConstancia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ver_constancia" />
+    </LinearLayout>
+</LinearLayout>

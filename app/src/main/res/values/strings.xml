@@ -1,0 +1,161 @@
+<resources>
+    <string name="app_name">InkaCourier</string>
+    <string name="marca">INKACOURIER</string>
+    <string name="volver">Volver</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="registrar">Registrar</string>
+
+    <!-- HU-01: Paradas -->
+    <string name="titulo_paradas">Mis paradas</string>
+    <string name="ruta_asignada">Ruta asignada</string>
+    <string name="tu_jornada">Tu jornada, parada a parada</string>
+    <string name="paradas_de_hoy">Paradas de hoy</string>
+    <string name="asignaciones">%d asignaciones</string>
+    <string name="pedido">Pedido %s</string>
+    <string name="sin_conexion">Sin conexión</string>
+    <string name="datos_ultima_actualizacion">Datos guardados en el dispositivo. Última actualización: %s.</string>
+
+    <!-- HU-01: Detalle -->
+    <string name="titulo_detalle">Detalle de parada</string>
+    <string name="destino_entrega">Destino de la entrega</string>
+    <string name="destinataria_titular">Destinatario titular</string>
+    <string name="contacto_registrado">Contacto registrado</string>
+    <string name="ventana_atencion">Ventana de atención</string>
+    <string name="referencias_acceso">Referencias de acceso</string>
+    <string name="contraentrega">Contraentrega</string>
+    <string name="importe_exacto_pedido">Importe exacto del pedido</string>
+    <string name="medios_autorizados">Medios autorizados</string>
+    <string name="registrar_recepcion">Registrar recepción</string>
+    <string name="registrar_visita_fallida">Registrar visita fallida</string>
+    <string name="ver_constancia">Ver constancia</string>
+    <string name="recepcion">Recepción</string>
+    <string name="recepcion_registrada">Recepción registrada</string>
+    <string name="cobro_registrado">Cobro registrado</string>
+    <string name="resultado_visita">Resultado de la visita</string>
+    <string name="visita_registrada">Visita registrada</string>
+    <string name="visita_fallida_causa">Visita fallida: %s</string>
+    <string name="visita_realizada">Visita realizada</string>
+    <string name="visita_realizada_texto">Intento documentado; se distingue de una parada aún no visitada.</string>
+
+    <!-- Filas de datos -->
+    <string name="receptor">Receptor</string>
+    <string name="documento">Documento</string>
+    <string name="fecha_y_hora">Fecha y hora</string>
+    <string name="resultado">Resultado</string>
+    <string name="importe_exacto">Importe exacto</string>
+    <string name="medio">Medio</string>
+    <string name="estado_cobro">Estado del cobro</string>
+    <string name="pago_integro_verificado">Pago íntegro verificado</string>
+    <string name="recaudacion_fisica">Recaudación física</string>
+    <string name="incorporados">%s incorporados</string>
+    <string name="confirmacion_de_despacho">Confirmación de Despacho</string>
+    <string name="abono_confirmado_fila">Abono bancario confirmado</string>
+    <string name="efectivo_fisico">Efectivo físico</string>
+    <string name="no_se_suma">%s · No se suma</string>
+    <string name="causa">Causa</string>
+    <string name="estado_pedido">Estado del pedido</string>
+    <string name="no_entregado">No entregado</string>
+    <string name="gps">GPS</string>
+    <string name="motivo">Motivo</string>
+    <string name="sector">Sector</string>
+    <string name="nota">Nota</string>
+    <string name="autorizacion">Autorización</string>
+    <string name="comprobada">Comprobada</string>
+    <string name="recepcion_alternativa">Recepción alternativa</string>
+    <string name="permitida">Permitida</string>
+    <string name="lugar">Lugar</string>
+    <string name="mismo_domicilio">Mismo domicilio del titular</string>
+
+    <!-- HU-03 / HU-04: Registro de recepción -->
+    <string name="pedido_sin_cobro">Pedido sin cobro pendiente</string>
+    <string name="pedido_contraentrega">Contraentrega · verificar pago antes de entregar</string>
+    <string name="verificacion_cobro">Verificación del cobro</string>
+    <string name="importe_exacto_cuenta">Importe exacto · Cuenta corporativa InkaCourier</string>
+    <string name="efectivo">Efectivo</string>
+    <string name="yape">Yape</string>
+    <string name="plin">Plin</string>
+    <string name="importe_exacto_verificado">Conté y verifiqué el importe exacto</string>
+    <string name="registro_unico">El cobro y la recepción se registran una sola vez.</string>
+    <string name="codigo_operacion">Código de operación</string>
+    <string name="operacion_observada">Operación observada en vivo</string>
+    <string name="confirmacion_despacho">Confirmación bancaria de Despacho recibida</string>
+    <string name="abono_confirmado">Abono confirmado</string>
+    <string name="abono_no_suma">No se suma a la recaudación física.</string>
+    <string name="confirmacion_pendiente">Confirmación pendiente</string>
+    <string name="confirmacion_pendiente_texto">No entregar ni registrar la recepción sin confirmación bancaria de Despacho.</string>
+    <string name="identidad_receptor">Identidad del receptor</string>
+    <string name="titular">Titular</string>
+    <string name="tercero_autorizado">Tercero autorizado</string>
+    <string name="tercero_no_admitido">El remitente no autorizó la recepción por un tercero para este pedido.</string>
+    <string name="nombre_receptor">Nombre del receptor</string>
+    <string name="tipo_documento">Tipo de documento</string>
+    <string name="numero_documento">Número de documento</string>
+    <string name="identidad_verificada">Identidad y documento verificados</string>
+    <string name="autorizacion_remitente">Autorización del remitente</string>
+    <string name="autorizacion_comprobada">Autorización del remitente comprobada</string>
+    <string name="recepcion_permitida">Recepción por tercero permitida en el mismo predio</string>
+    <string name="evidencias_recepcion">Evidencias de recepción</string>
+    <string name="firma_receptor">Firma del receptor</string>
+    <string name="capturar_firma">Capturar firma</string>
+    <string name="fotografia_fachada">Fotografía de fachada</string>
+    <string name="tomar_fotografia">Tomar fotografía</string>
+    <string name="pendiente">Pendiente</string>
+    <string name="capturada">Capturada</string>
+    <string name="registrada">Registrada</string>
+    <string name="sin_camara">No hay una aplicación de cámara disponible en el dispositivo.</string>
+    <string name="excepcion_seguridad">Excepción de seguridad</string>
+    <string name="fotografia_exonerada">Fotografía exonerada</string>
+    <string name="fotografia_exonerada_texto">Excepción autorizada por seguridad. No se exige foto de fachada.</string>
+    <string name="sector_catalogado">Sector catalogado</string>
+    <string name="motivo_tipificado">Motivo tipificado</string>
+    <string name="ayuda_motivo_exoneracion">Muestra del motivo autorizado del escenario; catálogo de Operaciones pendiente.</string>
+    <string name="nota_seguridad">Nota de seguridad</string>
+    <string name="fecha_y_ubicacion">Fecha y ubicación</string>
+    <string name="ubicacion_pendiente">Ubicación pendiente</string>
+    <string name="ubicacion_pendiente_texto">Se asociará al registro de la visita.</string>
+    <string name="fecha_hora_visita">Fecha y hora de la visita</string>
+    <string name="fecha_hora_visita_texto">Se conservarán al registrar.</string>
+    <string name="ubicacion_registrada">Ubicación registrada</string>
+    <string name="gps_valor">GPS · %s</string>
+    <string name="datos_registro">Datos del registro</string>
+    <string name="registro_no_valido">No se pudo registrar: revisa los datos obligatorios.</string>
+
+    <!-- Firma -->
+    <string name="firma_dentro_area">Firma dentro de esta área</string>
+    <string name="area_firma">Área de firma</string>
+    <string name="borrar_trazos">Borrar trazos</string>
+    <string name="confirmar_firma">Confirmar firma</string>
+
+    <!-- Constancia -->
+    <string name="titulo_constancia">Constancia</string>
+    <string name="constancia_registrada">Constancia de recepción registrada</string>
+    <string name="solo_lectura">Consulta de solo lectura.</string>
+
+    <!-- HU-05: Visita fallida -->
+    <string name="titulo_visita_fallida">Visita fallida</string>
+    <string name="documenta_intento">Documenta el intento sin registrar una entrega.</string>
+    <string name="resultado_intento">Resultado del intento</string>
+    <string name="causa_visita_fallida">Causa de visita fallida</string>
+    <string name="observaciones">Observaciones</string>
+    <string name="pago_no_verificado">Pago no verificado</string>
+    <string name="pago_no_verificado_texto">El pedido permanece sin entregar. No se registra un cobro confirmado.</string>
+    <string name="contexto_contacto">Contexto de contacto</string>
+    <string name="llegada_domicilio">Llegada real al domicilio</string>
+    <string name="gestion_contacto">Gestión de contacto</string>
+    <string name="continua_sin_respuesta">¿Continúa sin respuesta?</string>
+    <string name="extension_autorizada">¿Despacho autorizó extensión?</string>
+    <string name="si">Sí</string>
+    <string name="no">No</string>
+    <string name="ayuda_contacto">Documenta los tiempos reales de la visita. El registro exige 10 minutos sin respuesta ni extensión, con gestión de contacto entre los minutos 5 y 7.</string>
+    <string name="contacto_en_curso">Contacto en curso</string>
+    <string name="minutos_transcurridos">Han transcurrido %d minutos.</string>
+    <string name="sin_respuesta_destinatario">Sin respuesta del destinatario.</string>
+    <string name="ausencia_no_habilitada">Aún no corresponde registrar ausencia</string>
+    <string name="ausencia_no_habilitada_texto">Registrar al cumplir 10 minutos sin respuesta ni extensión autorizada por Despacho.</string>
+    <string name="recepcion_rechazada">Recepción rechazada</string>
+    <string name="motivo_comunicado">Motivo comunicado</string>
+    <string name="ayuda_motivo_rechazo">Ejemplos documentados en la historia; no constituyen un catálogo exhaustivo.</string>
+    <string name="constancias_aplicables">Constancias aplicables</string>
+    <string name="respaldo_intento">Respaldo del intento</string>
+    <string name="respaldo_vacio">Documentación de las gestiones realizadas en la visita.</string>
+</resources>
