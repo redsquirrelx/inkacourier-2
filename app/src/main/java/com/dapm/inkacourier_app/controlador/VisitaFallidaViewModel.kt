@@ -180,11 +180,10 @@ class VisitaFallidaViewModel(private val paradasViewModel: ParadasViewModel) : V
         if (borradorActual() != null) _borrador.value = null
     }
 
-    /** El borrador solo se lee o altera si su parada es propia del repartidor actual. */
+    /** Devuelve null si el borrador no pertenece al repartidor actual. */
     private fun borradorActual(): VisitaFallida? =
         _borrador.value?.takeIf { paradasViewModel.buscarParadaPropia(it.idParada) != null }
 
-    /** Notifica el cambio del borrador a la vista. */
     private fun publicar(borrador: VisitaFallida) {
         _borrador.value = borrador
     }

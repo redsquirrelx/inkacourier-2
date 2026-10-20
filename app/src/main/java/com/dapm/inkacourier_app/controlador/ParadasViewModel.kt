@@ -62,9 +62,8 @@ class ParadasViewModel(private val sesion: SesionViewModel) : ViewModel() {
     }
 
     /**
-     * Publica el estado de una parada después de guardar su resultado.
-     * Crea una lista nueva para que el ListAdapter detecte el cambio. Solo actualiza
-     * asignaciones propias del repartidor actual.
+     * Actualiza el estado de una parada propia tras guardar el resultado y publica la ruta.
+     * El adaptador compara la lista anterior con la nueva para notificar los cambios.
      */
     fun aplicarResultadoPersistido(idParada: String, estado: EstadoParada) {
         if (buscarParadaPropia(idParada) == null) {
@@ -78,7 +77,7 @@ class ParadasViewModel(private val sesion: SesionViewModel) : ViewModel() {
         Log.d(TAG, "Parada $idParada actualizada a $estado")
     }
 
-    /** Datos deterministas que demuestran todos los criterios de HU-01, HU-03, HU-04 y HU-05. */
+    /** Ruta de prueba con casos de HU-01, HU-03, HU-04 y HU-05. */
     private fun crearRutaSimulada(): List<Parada> = listOf(
         // Datos habituales, referencias de acceso y tercero autorizado (HU-01/CA-01, CA-02; HU-03).
         Parada(

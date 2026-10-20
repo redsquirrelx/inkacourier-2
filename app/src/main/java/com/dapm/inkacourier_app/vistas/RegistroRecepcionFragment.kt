@@ -265,7 +265,6 @@ class RegistroRecepcionFragment : Fragment() {
         }
     }
 
-    /** Solo el guardado exitoso vuelve al detalle. */
     private fun guardarRecepcion() {
         val actividad = requireActivity() as MainActivity
         val paradaVigente = actividad.conAccesoPropio { paradasViewModel.consultarParada(idParada) } ?: return

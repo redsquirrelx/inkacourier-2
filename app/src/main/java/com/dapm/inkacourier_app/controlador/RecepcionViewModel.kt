@@ -76,7 +76,7 @@ class RecepcionViewModel(private val paradasViewModel: ParadasViewModel) : ViewM
         publicar(b)
     }
 
-    /** Cambiar el medio invalida las verificaciones anteriores . */
+    /** Al cambiar el medio de pago hay que verificarlo de nuevo. */
     fun seleccionarMedioPago(medio: String) {
         val b = borradorActual() ?: return
         if (b.medioPago == medio) return
@@ -287,11 +287,10 @@ class RecepcionViewModel(private val paradasViewModel: ParadasViewModel) : ViewM
         publicar(b)
     }
 
-    /** El borrador solo se lee o altera si su parada es propia del repartidor actual. */
+    /** Devuelve null si el borrador no pertenece al repartidor actual. */
     private fun borradorActual(): Recepcion? =
         _borrador.value?.takeIf { paradasViewModel.buscarParadaPropia(it.idParada) != null }
 
-    /** Notifica el cambio del borrador a la vista. */
     private fun publicar(borrador: Recepcion) {
         _borrador.value = borrador
     }

@@ -12,7 +12,7 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import com.dapm.inkacourier_app.R
 
-/** Superficie de dibujo para la firma digital del receptor (.signature-pad; RF-08). */
+/** Vista para dibujar la firma del receptor (RF-08). */
 class FirmaView(context: Context, attrs: AttributeSet? = null) : View(context, attrs) {
 
     private val trazo = Path()

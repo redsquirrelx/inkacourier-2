@@ -89,7 +89,6 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
-    /** Vuelve a la pantalla anterior. */
     fun volver() {
         supportFragmentManager.popBackStack()
     }

@@ -31,7 +31,7 @@ import java.util.Locale
 
 private val LOCALE_PERU = Locale.forLanguageTag("es-PE")
 
-/** Colores de .badge, .notice y sus variantes success, warning, info y error. */
+/** Colores e iconos compartidos por las insignias y los avisos. */
 enum class Tono(@ColorRes val fondo: Int, @ColorRes val texto: Int, @DrawableRes val icono: Int) {
     NEUTRO(R.color.superficie_alta, R.color.sobre_superficie_variante, R.drawable.ic_info),
     EXITO(R.color.contenedor_exito, R.color.exito, R.drawable.ic_check),
