@@ -22,7 +22,7 @@ import com.google.android.material.snackbar.Snackbar
 import java.util.Calendar
 
 /**
- * Destino "registro_visita_fallida" (HU-05; SEQ-06, SEQ-07, SEQ-08).
+ * Pantalla de registro de visita fallida (HU-05).
  * Registrar vuelve al detalle solo si el intento se guardó correctamente.
  */
 class RegistroVisitaFallidaFragment : Fragment() {
@@ -57,8 +57,12 @@ class RegistroVisitaFallidaFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        parada = paradasViewModel.consultarParada(idParada)
-        val borrador = visitaFallidaViewModel.obtenerBorrador(parada)
+        val actividad = requireActivity() as MainActivity
+        // Una parada o un borrador ajenos se rechazan antes de mostrar o alterar datos.
+        val borrador = actividad.conAccesoPropio {
+            parada = paradasViewModel.consultarParada(idParada)
+            visitaFallidaViewModel.obtenerBorrador(parada)
+        } ?: return
 
         configurarBarra(binding.barra, getString(R.string.titulo_visita_fallida)) { cancelarVisitaFallida() }
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) { cancelarVisitaFallida() }
@@ -190,7 +194,7 @@ class RegistroVisitaFallidaFragment : Fragment() {
         mostrarFechaUbicacion(binding.fechaUbicacion, borrador.fechaHora, borrador.latitud, borrador.longitud)
         binding.btnRegistrar.isEnabled = visitaFallidaViewModel.puedeGuardar(parada, ahora)
 
-        // SEQ-07: con la documentación exigida completa se asocian fecha, hora y GPS del intento.
+        // Con la documentación exigida completa se asocian fecha, hora y GPS del intento.
         if (borrador.fechaHora == null && visitaFallidaViewModel.datosCompletos(parada, ahora)) {
             visitaFallidaViewModel.completarFechaUbicacion(ahora)
         }
@@ -219,17 +223,18 @@ class RegistroVisitaFallidaFragment : Fragment() {
     // ---- Navegación ----
 
     private fun registrarVisitaFallida() {
-        val paradaVigente = paradasViewModel.consultarParada(idParada)
+        val actividad = requireActivity() as MainActivity
+        val paradaVigente = actividad.conAccesoPropio { paradasViewModel.consultarParada(idParada) } ?: return
         val guardada = visitaFallidaViewModel.guardarVisitaFallida(paradaVigente, System.currentTimeMillis())
         if (guardada == null) {
             Snackbar.make(binding.root, R.string.registro_no_valido, Snackbar.LENGTH_LONG).show()
             return
         }
         paradasViewModel.aplicarResultadoPersistido(idParada, EstadoParada.FALLIDA)
-        (requireActivity() as MainActivity).volver()
+        actividad.volver()
     }
 
-    /** Cancelar o Atrás descarta el borrador y vuelve al detalle sin confirmación (D18). */
+    /** Cancelar o Atrás descarta el borrador y vuelve al detalle sin confirmación. */
     private fun cancelarVisitaFallida() {
         visitaFallidaViewModel.descartarBorrador()
         (requireActivity() as MainActivity).volver()

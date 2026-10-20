@@ -12,14 +12,13 @@ import com.dapm.inkacourier_app.R
 import com.dapm.inkacourier_app.controlador.ParadasViewModel
 import com.dapm.inkacourier_app.databinding.FragmentParadasBinding
 
-/** Destino "paradas": lista de la jornada (HU-01/CA-01, CA-04, CA-05; SEQ-01). */
+/** Pantalla de paradas: lista de la jornada (HU-01/CA-01, CA-04, CA-05). */
 class ParadasFragment : Fragment() {
 
     private var _binding: FragmentParadasBinding? = null
     private val binding get() = _binding!!
 
     private val paradasViewModel: ParadasViewModel by activityViewModels()
-    private val adapter = ParadasAdapter { parada -> abrirDetalle(parada.idParada) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentParadasBinding.inflate(inflater, container, false)
@@ -31,10 +30,12 @@ class ParadasFragment : Fragment() {
         configurarBarra(binding.barra, getString(R.string.titulo_paradas), alVolver = null)
         binding.txtFechaJornada.text = paradasViewModel.fechaJornada
         binding.rvParadas.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvParadas.adapter = adapter
 
+        // Consulta las asignaciones del repartidor actual; la lista sigue sus cambios.
+        val adapter = ParadasAdapter(paradasViewModel.consultarParadas()) { parada -> abrirDetalle(parada.idParada) }
+        binding.rvParadas.adapter = adapter
         paradasViewModel.paradas.observe(viewLifecycleOwner) { paradas ->
-            adapter.submitList(paradas)
+            adapter.actualizarParadas(paradas)
             binding.txtCantidad.text = getString(R.string.asignaciones, paradas.size)
         }
         paradasViewModel.sinConexion.observe(viewLifecycleOwner) { sinConexion ->

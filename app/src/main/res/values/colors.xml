@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Tokens de diseno/interfaces/sistema-diseno/tokens.css (DEC-UI-01). -->
+<!-- Paleta de colores de la aplicación. -->
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="negro">#FF000000</color>
+    <color name="blanco">#FFFFFFFF</color>
 
-    <color name="md_primary">#006A63</color>
-    <color name="md_on_primary">#FFFFFF</color>
-    <color name="md_primary_container">#9DF2E7</color>
-    <color name="md_on_primary_container">#00201D</color>
-    <color name="md_secondary">#4A635F</color>
-    <color name="md_secondary_container">#CDE8E2</color>
-    <color name="md_on_secondary_container">#06201C</color>
-    <color name="md_surface">#F7FAF8</color>
-    <color name="md_surface_container">#EBF2EE</color>
-    <color name="md_surface_high">#E3EBE7</color>
-    <color name="md_card">#FFFFFF</color>
-    <color name="md_on_surface">#18211E</color>
-    <color name="md_on_surface_variant">#48544F</color>
-    <color name="md_outline">#6E7973</color>
-    <color name="md_outline_variant">#BFCAC3</color>
-    <color name="md_error">#BA1A1A</color>
-    <color name="md_error_container">#FFDAD6</color>
-    <color name="md_on_error_container">#410002</color>
-    <color name="md_warning">#6E4A00</color>
-    <color name="md_warning_container">#FFEDC2</color>
-    <color name="md_success">#24513C</color>
-    <color name="md_success_container">#D6EFDE</color>
-    <color name="md_info">#284C70</color>
-    <color name="md_info_container">#DFECFA</color>
-    <color name="md_disabled">#DDE3DF</color>
-    <color name="md_on_disabled">#66716B</color>
+    <color name="primario">#006A63</color>
+    <color name="sobre_primario">#FFFFFF</color>
+    <color name="contenedor_primario">#9DF2E7</color>
+    <color name="sobre_contenedor_primario">#00201D</color>
+    <color name="secundario">#4A635F</color>
+    <color name="contenedor_secundario">#CDE8E2</color>
+    <color name="sobre_contenedor_secundario">#06201C</color>
+    <color name="superficie">#F7FAF8</color>
+    <color name="contenedor_superficie">#EBF2EE</color>
+    <color name="superficie_alta">#E3EBE7</color>
+    <color name="tarjeta">#FFFFFF</color>
+    <color name="sobre_superficie">#18211E</color>
+    <color name="sobre_superficie_variante">#48544F</color>
+    <color name="contorno">#6E7973</color>
+    <color name="contorno_variante">#BFCAC3</color>
+    <color name="error">#BA1A1A</color>
+    <color name="contenedor_error">#FFDAD6</color>
+    <color name="sobre_contenedor_error">#410002</color>
+    <color name="advertencia">#6E4A00</color>
+    <color name="contenedor_advertencia">#FFEDC2</color>
+    <color name="exito">#24513C</color>
+    <color name="contenedor_exito">#D6EFDE</color>
+    <color name="informacion">#284C70</color>
+    <color name="contenedor_informacion">#DFECFA</color>
+    <color name="deshabilitado">#DDE3DF</color>
+    <color name="sobre_deshabilitado">#66716B</color>
     <color name="firma_trazo">#163D38</color>
 </resources>

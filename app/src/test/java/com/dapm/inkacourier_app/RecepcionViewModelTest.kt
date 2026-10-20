@@ -1,6 +1,7 @@
 package com.dapm.inkacourier_app
 
 import com.dapm.inkacourier_app.controlador.ParadasViewModel
+import com.dapm.inkacourier_app.controlador.SesionViewModel
 import com.dapm.inkacourier_app.controlador.RecepcionViewModel
 import com.dapm.inkacourier_app.modelo.Recepcion
 import org.junit.Assert.assertEquals
@@ -25,8 +26,8 @@ class RecepcionViewModelTest {
 
     @Before
     fun preparar() {
-        paradas = ParadasViewModel()
-        viewModel = RecepcionViewModel()
+        paradas = ParadasViewModel(SesionViewModel().apply { iniciarSesion("lucho", "ruta01") })
+        viewModel = RecepcionViewModel(paradas)
     }
 
     @Test

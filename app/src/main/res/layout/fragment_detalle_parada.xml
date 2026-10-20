@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Destino "detalle_parada" (vistas/detalle-parada.html). Muestra los datos de HU-01
+<!-- Pantalla de detalle de parada. Muestra los datos de HU-01
      y los resultados guardados de HU-03, HU-04 y HU-05. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/md_surface"
+    android:background="@color/superficie"
     android:orientation="vertical">
 
     <include

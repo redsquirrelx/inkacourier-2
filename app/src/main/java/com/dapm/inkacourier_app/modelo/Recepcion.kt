@@ -67,7 +67,7 @@ data class Recepcion(
         const val ENTREGADO_TITULAR = "Entregado al titular"
         const val ENTREGADO_TERCERO = "Entregado a tercero autorizado"
 
-        /** Única muestra de motivo tipificado disponible en el diseño; el catálogo de Operaciones está pendiente. */
+        /** Única muestra de motivo tipificado disponible; el catálogo de Operaciones está pendiente. */
         val MOTIVOS_EXONERACION = listOf("Exoneración autorizada por seguridad")
     }
 }

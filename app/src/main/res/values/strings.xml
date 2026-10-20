@@ -5,6 +5,21 @@
     <string name="cancelar">Cancelar</string>
     <string name="registrar">Registrar</string>
 
+    <!-- SEQ-12: Inicio de sesión -->
+    <string name="iniciar_sesion">Iniciar sesión</string>
+    <string name="bienvenido">Bienvenido a InkaCourier</string>
+    <string name="tu_ruta_comienza">Tu ruta comienza aquí</string>
+    <string name="ingresa_credenciales">Ingresa con el usuario y la contraseña que te proporcionó la empresa.</string>
+    <string name="acceso_repartidor">Acceso del repartidor</string>
+    <string name="usuario">Usuario</string>
+    <string name="contrasena">Contraseña</string>
+    <string name="ingresa_usuario">Ingresa tu usuario.</string>
+    <string name="ingresa_contrasena">Ingresa tu contraseña.</string>
+    <string name="campos_obligatorios">Completa los campos obligatorios</string>
+    <string name="campos_obligatorios_texto">Ingresa tu usuario y contraseña para continuar.</string>
+    <string name="credenciales_incorrectas">Usuario o contraseña incorrectos</string>
+    <string name="credenciales_incorrectas_texto">Revisa tus credenciales e inténtalo nuevamente.</string>
+
     <!-- HU-01: Paradas -->
     <string name="titulo_paradas">Mis paradas</string>
     <string name="ruta_asignada">Ruta asignada</string>

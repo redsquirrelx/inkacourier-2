@@ -73,3 +73,21 @@ Simplificaciones respecto de los contratos provisionales del mapa de símbolos: 
 `actualizarBorrador(recepcion)` se usan operaciones por sección (`actualizarIdentidad`,
 `seleccionarMedioPago`, …); el guardado devuelve el registro o `null` en lugar de `Result`
 suspendido; las fechas son `Long` (minSdk 24) y firma/foto son `Bitmap` en memoria.
+
+## Inicio de sesión y aislamiento de asignaciones (SEQ-12)
+
+Fuente: `IngSoftware/implementacion` (INSTRUCCIONES.md, SEQ-12, navegacion.yaml, interfaz/inicio-sesion*.html).
+
+| Contrato | Implementación |
+|---|---|
+| `InicioSesionFragment` (`usuario`, `contrasena`, `btnIniciarSesion`) | `vistas/InicioSesionFragment`, `fragment_inicio_sesion` |
+| `SesionViewModel` (`repartidores`, `repartidorActual`, `iniciarSesion`) | `controlador/SesionViewModel` |
+| `Repartidor` / `Parada.idRepartidor` | `modelo/Repartidor`; P01–P08 → REP-01, P09–P10 → REP-02 |
+| Contexto compartido | `MainActivity.defaultViewModelProviderFactory`: una `SesionViewModel` inyectada en `ParadasViewModel`, que a su vez se inyecta en `RecepcionViewModel` y `VisitaFallidaViewModel` |
+| Filtrado y verificación | `ParadasViewModel.consultarParadas` (filtra y publica), `consultarParada` (`IllegalStateException`), `buscarParadaPropia` |
+| Revalidación en registros | `obtenerBorrador`, operaciones del borrador, `guardarRecepcion`, `guardarVisitaFallida`, `obtenerRecepcionGuardada`, `obtenerVisitaGuardada`, `descartarBorrador`, `aplicarResultadoPersistido` |
+| Rechazo sin cierre de la app | `MainActivity.conAccesoPropio` en detalle y formularios |
+| Proceso nuevo / rotación | `MainActivity.onCreate`: sin sesión descarta el estado guardado y abre `inicio_sesion`; con sesión (rotación) lo restaura |
+
+Pruebas: `SesionViewModelTest` (JVM), `InicioSesionTest` (Espresso), `RecepcionGuardadoTest.aislamiento_*`.
+`NavegacionTest` inicia sesión como REP-01 antes de cada recorrido.

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Destino "captura_firma" (vistas/firma-receptor.html; RF-08, DEC-NAV-01/D4). -->
+<!-- Diálogo de captura de firma del receptor (RF-08). -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -22,7 +22,7 @@
             android:layout_marginEnd="12dp"
             android:importantForAccessibility="no"
             android:src="@drawable/ic_firma"
-            app:tint="@color/md_on_surface" />
+            app:tint="@color/sobre_superficie" />
 
         <TextView
             style="@style/Texto"

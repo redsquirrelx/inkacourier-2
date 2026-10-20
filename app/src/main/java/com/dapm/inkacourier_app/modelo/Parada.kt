@@ -10,6 +10,8 @@ data class Parada(
     val idParada: String,
     val idPedido: String,
     val idJornada: String,
+    /** Propietario de la asignación (Repartidor.idRepartidor). */
+    val idRepartidor: String,
     val destinatario: String,
     val domicilio: String,
     val distrito: String,

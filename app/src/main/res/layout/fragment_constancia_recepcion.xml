@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Destino "constancia_recepcion" (vistas/constancia-recepcion.html; RF-14). Solo lectura. -->
+<!-- Pantalla de constancia de recepción (RF-14). Solo lectura. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/md_surface"
+    android:background="@color/superficie"
     android:orientation="vertical">
 
     <include
@@ -34,7 +34,7 @@
                     android:importantForAccessibility="no"
                     android:padding="16dp"
                     android:src="@drawable/ic_check"
-                    app:tint="@color/md_success" />
+                    app:tint="@color/exito" />
 
                 <TextView
                     android:id="@+id/txtPedido"

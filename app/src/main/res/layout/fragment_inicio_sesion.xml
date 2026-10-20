@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Pantalla de inicio de sesión.
+     Los campos no guardan su texto en el estado serializado: las credenciales solo viven en memoria. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/superficie"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/barra"
+        layout="@layout/view_barra" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout style="@style/Contenido.Pagina">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@drawable/espacio_12"
+                android:orientation="vertical"
+                android:showDividers="middle">
+
+                <TextView
+                    style="@style/Texto.Overline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bienvenido" />
+
+                <TextView
+                    style="@style/Texto.Seccion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tu_ruta_comienza" />
+
+                <TextView
+                    style="@style/Texto.Soporte"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ingresa_credenciales" />
+            </LinearLayout>
+
+            <com.google.android.material.card.MaterialCardView style="@style/Tarjeta">
+
+                <LinearLayout style="@style/Tarjeta.Contenido">
+
+                    <TextView
+                        style="@style/Texto.Seccion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/acceso_repartidor" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilUsuario"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/usuario">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/usuario"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:importantForAutofill="no"
+                            android:inputType="text|textNoSuggestions"
+                            android:saveEnabled="false" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilContrasena"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/contrasena">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/contrasena"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:importantForAutofill="no"
+                            android:inputType="textPassword"
+                            android:saveEnabled="false" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <include
+                android:id="@+id/avisoInicioSesion"
+                layout="@layout/view_aviso" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout style="@style/Acciones">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnIniciarSesion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/iniciar_sesion" />
+    </LinearLayout>
+</LinearLayout>

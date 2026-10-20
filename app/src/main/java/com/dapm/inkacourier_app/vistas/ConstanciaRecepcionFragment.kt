@@ -14,7 +14,7 @@ import com.dapm.inkacourier_app.databinding.FragmentConstanciaRecepcionBinding
 import com.dapm.inkacourier_app.modelo.Recepcion
 
 /**
- * Destino "constancia_recepcion" (RF-14; DEC-NAV-01/D8). Consulta de solo lectura:
+ * Pantalla de constancia de recepción (RF-14). Consulta de solo lectura:
  * abrirla no genera otra recepción ni otro aporte a la recaudación.
  */
 class ConstanciaRecepcionFragment : Fragment() {

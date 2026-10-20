@@ -19,8 +19,8 @@ import com.dapm.inkacourier_app.modelo.Recepcion
 import com.dapm.inkacourier_app.modelo.VisitaFallida
 
 /**
- * Destino "detalle_parada" (HU-01/CA-01 a CA-03, CA-05; SEQ-02). Tras un registro
- * muestra el resultado guardado: recepción y cobro (SEQ-05, SEQ-11) o visita fallida (SEQ-08).
+ * Pantalla de detalle de parada (HU-01/CA-01 a CA-03, CA-05). Tras un registro
+ * muestra el resultado guardado: recepción y cobro (HU-03, HU-04) o visita fallida (HU-05).
  */
 class DetalleParadaFragment : Fragment() {
 
@@ -54,7 +54,9 @@ class DetalleParadaFragment : Fragment() {
         }
 
         paradasViewModel.paradas.observe(viewLifecycleOwner) {
-            mostrarDetalle(paradasViewModel.consultarParada(idParada))
+            // Una parada ajena o sin sesión se rechaza antes de mostrar datos.
+            val parada = actividad.conAccesoPropio { paradasViewModel.consultarParada(idParada) } ?: return@observe
+            mostrarDetalle(parada)
         }
         paradasViewModel.sinConexion.observe(viewLifecycleOwner) { sinConexion ->
             if (sinConexion) mostrarAvisoUltimaActualizacion() else ocultarAviso(binding.avisoSinConexion)
@@ -87,7 +89,7 @@ class DetalleParadaFragment : Fragment() {
         val porAtender = parada.estado.estaPorAtender()
         binding.btnRegistrarRecepcion.visibility = visibleSi(porAtender)
         binding.btnRegistrarVisitaFallida.visibility = visibleSi(porAtender)
-        // La constancia solo se abre si existe una recepción guardada (NAV-01, verConstancia).
+        // La constancia solo se abre si existe una recepción guardada.
         binding.btnVerConstancia.visibility = visibleSi(recepcion != null)
         binding.acciones.visibility = visibleSi(porAtender || recepcion != null)
     }

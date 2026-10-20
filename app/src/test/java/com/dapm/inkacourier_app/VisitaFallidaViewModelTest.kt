@@ -1,6 +1,7 @@
 package com.dapm.inkacourier_app
 
 import com.dapm.inkacourier_app.controlador.ParadasViewModel
+import com.dapm.inkacourier_app.controlador.SesionViewModel
 import com.dapm.inkacourier_app.controlador.UbicacionSimulada
 import com.dapm.inkacourier_app.controlador.VisitaFallidaViewModel
 import com.dapm.inkacourier_app.modelo.Parada
@@ -29,8 +30,8 @@ class VisitaFallidaViewModelTest {
 
     @Before
     fun preparar() {
-        paradas = ParadasViewModel()
-        viewModel = VisitaFallidaViewModel()
+        paradas = ParadasViewModel(SesionViewModel().apply { iniciarSesion("lucho", "ruta01") })
+        viewModel = VisitaFallidaViewModel(paradas)
     }
 
     private fun iniciar(idParada: String): Parada {

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Pie de acciones: superficie con borde superior (.actions). -->
+<!-- Pie de acciones: superficie con borde superior. -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
-        <shape><solid android:color="@color/md_outline_variant" /></shape>
+        <shape><solid android:color="@color/contorno_variante" /></shape>
     </item>
     <item android:top="1dp">
-        <shape><solid android:color="@color/md_surface" /></shape>
+        <shape><solid android:color="@color/superficie" /></shape>
     </item>
 </layer-list>

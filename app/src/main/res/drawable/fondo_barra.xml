@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Barra superior: superficie con borde inferior (.toolbar). -->
+<!-- Barra superior: superficie con borde inferior. -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
-        <shape><solid android:color="@color/md_outline_variant" /></shape>
+        <shape><solid android:color="@color/contorno_variante" /></shape>
     </item>
     <item android:bottom="1dp">
-        <shape><solid android:color="@color/md_surface" /></shape>
+        <shape><solid android:color="@color/superficie" /></shape>
     </item>
 </layer-list>

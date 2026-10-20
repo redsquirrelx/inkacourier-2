@@ -11,7 +11,7 @@ import com.dapm.inkacourier_app.controlador.RecepcionViewModel
 import com.dapm.inkacourier_app.databinding.DialogFirmaReceptorBinding
 
 /**
- * Destino "captura_firma" (DEC-NAV-01/D4). Confirmar asocia la firma al borrador;
+ * Diálogo de captura de firma del receptor (RF-08). Confirmar asocia la firma al borrador;
  * cancelar vuelve sin modificar la firma anterior.
  */
 class FirmaReceptorDialog : DialogFragment() {

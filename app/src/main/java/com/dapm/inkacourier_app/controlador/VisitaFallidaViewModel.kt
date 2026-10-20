@@ -9,20 +9,23 @@ import com.dapm.inkacourier_app.modelo.VisitaFallida
 
 /**
  * Controlador de HU-05. Con alcance de Activity, conserva el borrador del intento
- * y las visitas fallidas guardadas que muestra el detalle de la parada.
+ * y las visitas fallidas guardadas que muestra el detalle de la parada. Solo opera sobre
+ * paradas propias del repartidor actual, resueltas en la fuente central de ParadasViewModel.
  */
-class VisitaFallidaViewModel : ViewModel() {
+class VisitaFallidaViewModel(private val paradasViewModel: ParadasViewModel) : ViewModel() {
 
     private val visitasGuardadas = mutableMapOf<String, VisitaFallida>()
 
     private val _borrador = MutableLiveData<VisitaFallida?>()
     val borrador: LiveData<VisitaFallida?> = _borrador
 
+    /** Rechaza con IllegalStateException una parada ajena o sin sesión, sin leer el borrador. */
     fun obtenerBorrador(parada: Parada): VisitaFallida {
-        val actual = _borrador.value
-        if (actual != null && actual.idParada == parada.idParada) return actual
+        val vigente = paradasViewModel.consultarParada(parada.idParada)
+        val actual = borradorActual()
+        if (actual != null && actual.idParada == vigente.idParada) return actual
 
-        val nuevo = VisitaFallida(idParada = parada.idParada, sectorRiesgo = parada.sectorRiesgo)
+        val nuevo = VisitaFallida(idParada = vigente.idParada, sectorRiesgo = vigente.sectorRiesgo)
         _borrador.value = nuevo
         return nuevo
     }
@@ -39,20 +42,20 @@ class VisitaFallidaViewModel : ViewModel() {
     }
 
     fun seleccionarCausa(causa: String) {
-        val b = _borrador.value ?: return
+        val b = borradorActual() ?: return
         b.causa = causa
         publicar(b)
     }
 
     fun actualizarObservaciones(observaciones: String) {
-        val b = _borrador.value ?: return
+        val b = borradorActual() ?: return
         b.observaciones = observaciones
         publicar(b)
     }
 
-    /** Datos de la gestión de contacto documentados por el repartidor (DEC-SEQ-01/5). */
+    /** Datos de la gestión de contacto documentados por el repartidor. */
     fun actualizarContacto(llegada: Long?, contacto: Long?, sinRespuesta: Boolean?, extensionAutorizada: Boolean?) {
-        val b = _borrador.value ?: return
+        val b = borradorActual() ?: return
         b.llegadaDomicilio = llegada
         b.contactoDuranteVentana = contacto
         b.sinRespuesta = sinRespuesta
@@ -61,14 +64,14 @@ class VisitaFallidaViewModel : ViewModel() {
     }
 
     fun actualizarRechazo(motivo: String?, constancias: String) {
-        val b = _borrador.value ?: return
+        val b = borradorActual() ?: return
         b.motivoRechazo = motivo
         b.constanciasRechazo = constancias
         publicar(b)
     }
 
     fun actualizarExcepcion(motivo: String?, nota: String) {
-        val b = _borrador.value ?: return
+        val b = borradorActual() ?: return
         b.motivoExoneracion = motivo
         b.notaSeguridad = nota
         publicar(b)
@@ -76,16 +79,16 @@ class VisitaFallidaViewModel : ViewModel() {
 
     /** Vuelve a notificar el borrador para evaluarlo con la hora actual (el plazo de ausencia avanza con el reloj). */
     fun reevaluar() {
-        val b = _borrador.value ?: return
+        val b = borradorActual() ?: return
         publicar(b)
     }
 
     /**
-     * SEQ-07: asocia fecha, hora y GPS reales del intento (RF-17).
+     * Asocia fecha, hora y GPS reales del intento (RF-17).
      * El Fragment la invoca cuando la documentación exigida está completa.
      */
     fun completarFechaUbicacion(ahora: Long) {
-        val b = _borrador.value ?: return
+        val b = borradorActual() ?: return
         b.fechaHora = ahora
         b.latitud = UbicacionSimulada.LATITUD
         b.longitud = UbicacionSimulada.LONGITUD
@@ -99,7 +102,7 @@ class VisitaFallidaViewModel : ViewModel() {
      * Cualquier dato desconocido o incoherente impide registrar.
      */
     fun puedeRegistrarAusencia(ahora: Long): Boolean {
-        val b = _borrador.value ?: return false
+        val b = borradorActual() ?: return false
         val llegada = b.llegadaDomicilio ?: return false
         val contacto = b.contactoDuranteVentana ?: return false
         if (b.sinRespuesta != true || b.extensionAutorizada != false) return false
@@ -111,14 +114,14 @@ class VisitaFallidaViewModel : ViewModel() {
 
     /** Minutos desde la llegada al domicilio; null si no está informada o es futura. */
     fun minutosTranscurridos(ahora: Long): Long? {
-        val llegada = _borrador.value?.llegadaDomicilio ?: return null
+        val llegada = borradorActual()?.llegadaDomicilio ?: return null
         if (llegada > ahora) return null
         return (ahora - llegada) / UN_MINUTO
     }
 
     /** Datos obligatorios según la causa, sin contar fecha y ubicación. */
     fun datosCompletos(parada: Parada, ahora: Long): Boolean {
-        val b = _borrador.value ?: return false
+        val b = borradorActual() ?: return false
         val causa = b.causa ?: return false
         if (causa !in causasDisponibles(parada) || b.observaciones.isBlank()) return false
         if (parada.esZonaAltoRiesgo() && b.motivoExoneracion == null) return false
@@ -130,18 +133,25 @@ class VisitaFallidaViewModel : ViewModel() {
     }
 
     fun puedeGuardar(parada: Parada, ahora: Long): Boolean =
-        datosCompletos(parada, ahora) && _borrador.value?.fechaHora != null
+        datosCompletos(parada, ahora) && borradorActual()?.fechaHora != null
 
     /**
      * Guarda el intento (RF-16, RF-17). Revalida con la hora actual del dispositivo.
      * No registra cobro, recepción ni constancia: el pedido sigue sin entregar.
      */
     fun guardarVisitaFallida(parada: Parada, ahora: Long): VisitaFallida? {
-        if (!parada.estado.estaPorAtender() || !puedeGuardar(parada, ahora)) {
-            Log.w(TAG, "Visita fallida de ${parada.idParada} no válida; se conserva el borrador")
+        // El propietario de la parada del borrador se verifica en la fuente central antes de cualquier efecto.
+        val b = borradorActual()
+        val vigente = paradasViewModel.buscarParadaPropia(parada.idParada)
+        if (b == null || vigente == null || b.idParada != vigente.idParada) {
+            Log.w(TAG, "Visita fallida de ${parada.idParada} sin borrador propio; no se guarda")
             return null
         }
-        val guardada = _borrador.value!!.copy()
+        if (!vigente.estado.estaPorAtender() || !puedeGuardar(vigente, ahora)) {
+            Log.w(TAG, "Visita fallida de ${vigente.idParada} no válida; se conserva el borrador")
+            return null
+        }
+        val guardada = b.copy()
         // Solo se conservan los datos de la causa seleccionada.
         if (guardada.causa != VisitaFallida.DESTINATARIO_AUSENTE) {
             guardada.llegadaDomicilio = null
@@ -153,17 +163,26 @@ class VisitaFallidaViewModel : ViewModel() {
             guardada.motivoRechazo = null
             guardada.constanciasRechazo = ""
         }
-        visitasGuardadas[parada.idParada] = guardada
-        Log.d(TAG, "Visita fallida guardada: ${guardada.causa} (${parada.idPedido})")
+        visitasGuardadas[vigente.idParada] = guardada
+        Log.d(TAG, "Visita fallida guardada: ${guardada.causa} (${vigente.idPedido})")
         descartarBorrador()
         return guardada
     }
 
-    fun obtenerVisitaGuardada(idParada: String): VisitaFallida? = visitasGuardadas[idParada]
-
-    fun descartarBorrador() {
-        _borrador.value = null
+    /** Solo devuelve visitas de asignaciones propias del repartidor actual. */
+    fun obtenerVisitaGuardada(idParada: String): VisitaFallida? {
+        if (paradasViewModel.buscarParadaPropia(idParada) == null) return null
+        return visitasGuardadas[idParada]
     }
+
+    /** Descarta solo el borrador propio. */
+    fun descartarBorrador() {
+        if (borradorActual() != null) _borrador.value = null
+    }
+
+    /** El borrador solo se lee o altera si su parada es propia del repartidor actual. */
+    private fun borradorActual(): VisitaFallida? =
+        _borrador.value?.takeIf { paradasViewModel.buscarParadaPropia(it.idParada) != null }
 
     /** Notifica el cambio del borrador a la vista. */
     private fun publicar(borrador: VisitaFallida) {

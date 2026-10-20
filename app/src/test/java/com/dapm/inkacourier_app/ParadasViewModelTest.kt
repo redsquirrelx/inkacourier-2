@@ -1,6 +1,7 @@
 package com.dapm.inkacourier_app
 
 import com.dapm.inkacourier_app.controlador.ParadasViewModel
+import com.dapm.inkacourier_app.controlador.SesionViewModel
 import com.dapm.inkacourier_app.modelo.EstadoParada
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -22,7 +23,7 @@ class ParadasViewModelTest {
 
     @Before
     fun preparar() {
-        viewModel = ParadasViewModel()
+        viewModel = ParadasViewModel(SesionViewModel().apply { iniciarSesion("lucho", "ruta01") })
     }
 
     @Test

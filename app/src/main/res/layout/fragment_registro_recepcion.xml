@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Destino "registro_recepcion" (vistas/registro-recepcion.html). HU-03 y sección
-     condicional de cobro de HU-04 (DEC-NAV-01/D6). -->
+<!-- Pantalla de registro de recepción. HU-03 y sección
+     condicional de cobro de HU-04. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/md_surface"
+    android:background="@color/superficie"
     android:orientation="vertical">
 
     <include
@@ -196,7 +196,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/tercero_no_admitido"
-                        android:textColor="@color/md_error" />
+                        android:textColor="@color/error" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
@@ -327,7 +327,7 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:background="@color/md_outline_variant" />
+                            android:background="@color/contorno_variante" />
 
                         <LinearLayout
                             android:layout_width="match_parent"

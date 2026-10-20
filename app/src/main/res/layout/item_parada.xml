@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Fila de la lista de paradas (.stop). -->
+<!-- Fila de la lista de paradas. -->
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -75,6 +75,6 @@
             android:layout_marginTop="6dp"
             android:importantForAccessibility="no"
             android:src="@drawable/ic_chevron"
-            app:tint="@color/md_on_surface" />
+            app:tint="@color/sobre_superficie" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

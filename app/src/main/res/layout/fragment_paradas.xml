@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Destino "paradas" (vistas/paradas.html; HU-01/CA-01, CA-04, CA-05).
-     La cabecera y la lista se desplazan juntas, como .page-content del diseño. -->
+<!-- Pantalla de paradas (HU-01/CA-01, CA-04, CA-05).
+     La cabecera y la lista se desplazan juntas. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/md_surface"
+    android:background="@color/superficie"
     android:orientation="vertical">
 
     <include

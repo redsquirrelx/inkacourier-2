@@ -25,7 +25,7 @@ import com.dapm.inkacourier_app.modelo.Recepcion
 import com.google.android.material.snackbar.Snackbar
 
 /**
- * Destino "registro_recepcion" (HU-03 y HU-04; SEQ-03, SEQ-04, SEQ-05, SEQ-09 a SEQ-11).
+ * Pantalla de registro de recepción (HU-03 y HU-04).
  * Los datos se conservan en el borrador de RecepcionViewModel mientras se captura la firma o la foto.
  */
 class RegistroRecepcionFragment : Fragment() {
@@ -42,7 +42,7 @@ class RegistroRecepcionFragment : Fragment() {
     /** Evita reenviar al controlador los cambios que la propia vista aplica al renderizar. */
     private var actualizandoVista = false
 
-    /** Cámara externa (destino "camara"); null indica captura cancelada. */
+    /** Cámara externa; null indica captura cancelada. */
     private val camara = registerForActivityResult(ActivityResultContracts.TakePicturePreview()) { resultadoCaptura ->
         recepcionViewModel.asociarFotografia(resultadoCaptura)
     }
@@ -54,8 +54,12 @@ class RegistroRecepcionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        parada = paradasViewModel.consultarParada(idParada)
-        val borrador = recepcionViewModel.obtenerBorrador(parada)
+        val actividad = requireActivity() as MainActivity
+        // Una parada o un borrador ajenos se rechazan antes de mostrar o alterar datos.
+        val borrador = actividad.conAccesoPropio {
+            parada = paradasViewModel.consultarParada(idParada)
+            recepcionViewModel.obtenerBorrador(parada)
+        } ?: return
 
         configurarBarra(binding.barra, getString(R.string.registrar_recepcion)) { cancelarRecepcion() }
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) { cancelarRecepcion() }
@@ -183,7 +187,7 @@ class RegistroRecepcionFragment : Fragment() {
         binding.btnGuardarRecepcion.isEnabled = recepcionViewModel.puedeGuardar(parada)
         actualizandoVista = false
 
-        // SEQ-04: con las evidencias y demás datos completos se asocian fecha, hora y GPS.
+        // Con las evidencias y demás datos completos se asocian fecha, hora y GPS.
         if (borrador.fechaHora == null && recepcionViewModel.datosCompletos(parada)) {
             recepcionViewModel.completarFechaUbicacion()
         }
@@ -236,7 +240,7 @@ class RegistroRecepcionFragment : Fragment() {
         }
     }
 
-    /** El medio de pago elegido muestra la marca ✓ del diseño (.segment[aria-pressed=true]). */
+    /** El medio de pago elegido muestra la marca ✓. */
     private fun marcarMedioSeleccionado() {
         listOf(binding.btnEfectivo, binding.btnYape, binding.btnPlin).forEach { boton ->
             boton.icon = if (boton.isChecked) ContextCompat.getDrawable(requireContext(), R.drawable.ic_check) else null
@@ -261,19 +265,20 @@ class RegistroRecepcionFragment : Fragment() {
         }
     }
 
-    /** Solo el guardado exitoso vuelve al detalle (evento recepcionGuardada; DEC-NAV-01/D3). */
+    /** Solo el guardado exitoso vuelve al detalle. */
     private fun guardarRecepcion() {
-        val paradaVigente = paradasViewModel.consultarParada(idParada)
+        val actividad = requireActivity() as MainActivity
+        val paradaVigente = actividad.conAccesoPropio { paradasViewModel.consultarParada(idParada) } ?: return
         val guardada = recepcionViewModel.guardarRecepcion(paradaVigente)
         if (guardada == null) {
             Snackbar.make(binding.root, R.string.registro_no_valido, Snackbar.LENGTH_LONG).show()
             return
         }
         paradasViewModel.aplicarResultadoPersistido(idParada, EstadoParada.ENTREGADA)
-        (requireActivity() as MainActivity).volver()
+        actividad.volver()
     }
 
-    /** Cancelar o Atrás descarta el borrador y vuelve al detalle sin confirmación (D18). */
+    /** Cancelar o Atrás descarta el borrador y vuelve al detalle sin confirmación. */
     private fun cancelarRecepcion() {
         recepcionViewModel.descartarBorrador()
         (requireActivity() as MainActivity).volver()

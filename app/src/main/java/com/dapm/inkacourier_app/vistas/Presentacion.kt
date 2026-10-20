@@ -26,19 +26,18 @@ import java.util.Date
 import java.util.Locale
 
 /*
- * Funciones de presentación reutilizadas por varias pantallas, equivalentes a los
- * componentes compartidos de diseno/interfaces/sistema-diseno/componentes.css.
+ * Funciones de presentación reutilizadas por varias pantallas.
  */
 
 private val LOCALE_PERU = Locale.forLanguageTag("es-PE")
 
 /** Colores de .badge, .notice y sus variantes success, warning, info y error. */
 enum class Tono(@ColorRes val fondo: Int, @ColorRes val texto: Int, @DrawableRes val icono: Int) {
-    NEUTRO(R.color.md_surface_high, R.color.md_on_surface_variant, R.drawable.ic_info),
-    EXITO(R.color.md_success_container, R.color.md_success, R.drawable.ic_check),
-    ADVERTENCIA(R.color.md_warning_container, R.color.md_warning, R.drawable.ic_advertencia),
-    INFO(R.color.md_info_container, R.color.md_info, R.drawable.ic_info),
-    ERROR(R.color.md_error_container, R.color.md_on_error_container, R.drawable.ic_advertencia)
+    NEUTRO(R.color.superficie_alta, R.color.sobre_superficie_variante, R.drawable.ic_info),
+    EXITO(R.color.contenedor_exito, R.color.exito, R.drawable.ic_check),
+    ADVERTENCIA(R.color.contenedor_advertencia, R.color.advertencia, R.drawable.ic_advertencia),
+    INFO(R.color.contenedor_informacion, R.color.informacion, R.drawable.ic_info),
+    ERROR(R.color.contenedor_error, R.color.sobre_contenedor_error, R.drawable.ic_advertencia)
 }
 
 fun visibleSi(condicion: Boolean): Int = if (condicion) View.VISIBLE else View.GONE
@@ -53,7 +52,7 @@ fun formatearFechaHora(milisegundos: Long): String =
 fun formatearHora(milisegundos: Long): String =
     SimpleDateFormat("HH:mm", LOCALE_PERU).format(Date(milisegundos))
 
-/** Ejemplo: "−12.0931, −77.0287" (con el signo menos tipográfico del diseño). */
+/** Ejemplo: "−12.0931, −77.0287" (con signo menos tipográfico). */
 fun formatearGps(latitud: Double?, longitud: Double?): String {
     fun coordenada(valor: Double?) = String.format(Locale.US, "%.4f", valor ?: 0.0).replace('-', '−')
     return "${coordenada(latitud)}, ${coordenada(longitud)}"

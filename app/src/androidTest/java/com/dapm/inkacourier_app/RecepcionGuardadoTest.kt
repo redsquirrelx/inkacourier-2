@@ -4,7 +4,9 @@ import android.graphics.Bitmap
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.dapm.inkacourier_app.controlador.ParadasViewModel
+import com.dapm.inkacourier_app.controlador.SesionViewModel
 import com.dapm.inkacourier_app.controlador.RecepcionViewModel
+import com.dapm.inkacourier_app.modelo.EstadoParada
 import com.dapm.inkacourier_app.modelo.Parada
 import com.dapm.inkacourier_app.modelo.Recepcion
 import org.junit.Assert.assertEquals
@@ -20,6 +22,7 @@ import java.math.BigDecimal
 @RunWith(AndroidJUnit4::class)
 class RecepcionGuardadoTest {
 
+    private lateinit var sesion: SesionViewModel
     private lateinit var paradas: ParadasViewModel
     private lateinit var viewModel: RecepcionViewModel
     private val imagen = Bitmap.createBitmap(10, 10, Bitmap.Config.ARGB_8888)
@@ -30,8 +33,9 @@ class RecepcionGuardadoTest {
 
     @Before
     fun preparar() = enHiloPrincipal {
-        paradas = ParadasViewModel()
-        viewModel = RecepcionViewModel()
+        sesion = SesionViewModel().apply { iniciarSesion("lucho", "ruta01") }
+        paradas = ParadasViewModel(sesion)
+        viewModel = RecepcionViewModel(paradas)
     }
 
     private fun completarRecepcion(parada: Parada, nombre: String, tercero: Boolean = false) {
@@ -109,7 +113,7 @@ class RecepcionGuardadoTest {
         assertSame(recepcion, viewModel.guardarRecepcion(parada))
         assertEquals(BigDecimal("128.50"), viewModel.recaudacionFisicaSoles)
 
-        // SEQ-11: un reenvío con datos incompatibles falla sin sobrescribir el registro.
+        // Un reenvío con datos incompatibles falla sin sobrescribir el registro.
         viewModel.actualizarIdentidad("Otra Persona", Recepcion.DNI, "11111111", verificada = true)
         assertNull(viewModel.guardarRecepcion(parada))
         assertSame(recepcion, viewModel.obtenerRecepcionGuardada("P02"))
@@ -170,5 +174,37 @@ class RecepcionGuardadoTest {
         assertEquals(true, recepcion.autorizacionRemitente)
         assertEquals(BigDecimal("64.90"), recepcion.importeCobradoSoles)
         assertEquals(Recepcion.EFECTIVO, recepcion.medioPago)
+    }
+
+    @Test
+    fun aislamiento_borradorAjenoNoSeGuardaNiModificaLaRecaudacion() = enHiloPrincipal {
+        val parada = paradas.consultarParada("P02")
+        completarRecepcion(parada, "Diego Torres")
+        viewModel.confirmarImporteExacto(true)
+
+        // Con otro repartidor en el contexto compartido, el borrador de REP-01 es ajeno.
+        assertEquals(true, sesion.iniciarSesion("rosa", "ruta02"))
+        assertNull(viewModel.guardarRecepcion(parada))
+        assertEquals(false, viewModel.puedeGuardar(parada))
+        viewModel.asociarFirma(imagen)
+        viewModel.descartarBorrador()
+        assertNotNull("El descarte no afecta el borrador ajeno", viewModel.borrador.value)
+        assertNull(viewModel.obtenerRecepcionGuardada("P02"))
+        assertEquals(BigDecimal("0.00"), viewModel.recaudacionFisicaSoles)
+        paradas.aplicarResultadoPersistido("P02", EstadoParada.ENTREGADA)
+
+        assertEquals(true, sesion.iniciarSesion("lucho", "ruta01"))
+        assertEquals("El estado ajeno no cambió", EstadoParada.EN_CAMINO, paradas.consultarParada("P02").estado)
+        assertNotNull("El borrador propio sigue disponible para su dueño", viewModel.guardarRecepcion(parada))
+    }
+
+    @Test
+    fun aislamiento_elGuardadoUsaLaParadaCentralYNoLaEnviadaPorLaVista() = enHiloPrincipal {
+        val entregada = paradas.consultarParada("P03")
+        completarRecepcion(entregada, "Ana Mendoza")
+
+        val alterada = entregada.copy(estado = EstadoParada.PENDIENTE)
+        assertNull(viewModel.guardarRecepcion(alterada))
+        assertNull(viewModel.obtenerRecepcionGuardada("P03"))
     }
 }

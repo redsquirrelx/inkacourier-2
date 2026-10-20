@@ -19,13 +19,17 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
-/** Recorridos de NAV-01 sobre la interfaz real (HU-01 y retornos de registro). */
+/** Recorridos de navegación sobre la interfaz real (HU-01 y retornos de registro). */
 @RunWith(AndroidJUnit4::class)
 class NavegacionTest {
 
+    /** Cada recorrido parte de una sesión de REP-01. */
     @Before
     fun iniciar() {
         ActivityScenario.launch(MainActivity::class.java)
+        onView(withId(R.id.usuario)).perform(typeText("lucho"))
+        onView(withId(R.id.contrasena)).perform(typeText("ruta01"), closeSoftKeyboard())
+        onView(withId(R.id.btnIniciarSesion)).perform(click())
     }
 
     @Test

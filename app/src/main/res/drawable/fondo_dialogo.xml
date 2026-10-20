@@ -2,6 +2,6 @@
 <inset xmlns:android="http://schemas.android.com/apk/res/android" android:inset="20dp">
     <shape android:shape="rectangle">
         <corners android:radius="28dp" />
-        <solid android:color="@color/md_surface_container" />
+        <solid android:color="@color/contenedor_superficie" />
     </shape>
 </inset>
