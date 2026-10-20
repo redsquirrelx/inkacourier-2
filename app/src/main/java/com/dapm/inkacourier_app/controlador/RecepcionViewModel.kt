@@ -101,17 +101,27 @@ class RecepcionViewModel : ViewModel() {
         publicar(b)
     }
 
+    /** Una firma nueva invalida la fecha y el GPS anteriores; la vista los vuelve a asociar (SEQ-04). */
     fun asociarFirma(firma: Bitmap) {
         val b = borradorActual() ?: return
         b.firma = firma
+        b.fechaHora = null
+        b.latitud = null
+        b.longitud = null
         publicar(b)
     }
 
-    /** Un resultado null (captura cancelada) conserva la fotografía anterior. */
+    /**
+     * Un resultado null (captura cancelada) conserva la fotografía, la fecha y el GPS anteriores.
+     * Una foto nueva invalida la fecha y el GPS; la vista los vuelve a asociar (SEQ-04).
+     */
     fun asociarFotografia(resultadoCaptura: Bitmap?) {
         val b = borradorActual() ?: return
         if (resultadoCaptura == null) return
         b.fotografiaFachada = resultadoCaptura
+        b.fechaHora = null
+        b.latitud = null
+        b.longitud = null
         publicar(b)
     }
 
@@ -182,11 +192,28 @@ class RecepcionViewModel : ViewModel() {
 
     /**
      * Guarda la recepción con su cobro y genera la constancia (RF-12 a RF-14, RF-24, RF-26 a RF-28).
-     * Devuelve null si los datos no son válidos; el borrador se conserva intacto.
+     * Devuelve null si los datos no son válidos o contradicen la recepción ya registrada;
+     * el borrador se conserva intacto.
      */
     fun guardarRecepcion(parada: Parada): Recepcion? {
         val existente = recepcionesGuardadas[parada.idPedido]
         if (existente != null) {
+            // SEQ-11: un reenvío con los mismos datos devuelve el registro existente;
+            // uno con datos incompatibles falla sin sobrescribirlo.
+            val b = _borrador.value
+            val compatible = b == null || (
+                b.idParada == existente.idParada &&
+                    b.tipoReceptor == existente.tipoReceptor &&
+                    b.nombreReceptor == existente.nombreReceptor &&
+                    b.tipoDocumento == existente.tipoDocumento &&
+                    b.numeroDocumento == existente.numeroDocumento &&
+                    (!parada.esContraentrega() ||
+                        (b.medioPago == existente.medioPago && b.codigoOperacion == existente.codigoOperacion))
+                )
+            if (!compatible) {
+                Log.w(TAG, "Conflicto: el pedido ${parada.idPedido} ya tiene otra recepción registrada; no se sobrescribe")
+                return null
+            }
             Log.w(TAG, "El pedido ${parada.idPedido} ya tiene recepción registrada; no se duplica")
             return existente
         }

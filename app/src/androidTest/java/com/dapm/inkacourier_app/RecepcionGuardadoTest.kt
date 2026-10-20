@@ -108,6 +108,37 @@ class RecepcionGuardadoTest {
         viewModel.confirmarImporteExacto(true)
         assertSame(recepcion, viewModel.guardarRecepcion(parada))
         assertEquals(BigDecimal("128.50"), viewModel.recaudacionFisicaSoles)
+
+        // SEQ-11: un reenvío con datos incompatibles falla sin sobrescribir el registro.
+        viewModel.actualizarIdentidad("Otra Persona", Recepcion.DNI, "11111111", verificada = true)
+        assertNull(viewModel.guardarRecepcion(parada))
+        assertSame(recepcion, viewModel.obtenerRecepcionGuardada("P02"))
+        assertEquals("Diego Torres", recepcion.nombreReceptor)
+        assertEquals("El borrador se conserva", "Otra Persona", viewModel.borrador.value!!.nombreReceptor)
+        assertEquals(BigDecimal("128.50"), viewModel.recaudacionFisicaSoles)
+    }
+
+    @Test
+    fun hu03_cambiarUnaEvidenciaInvalidaFechaYGps() = enHiloPrincipal {
+        val parada = paradas.consultarParada("P01")
+        completarRecepcion(parada, "María Rojas")
+        assertNotNull(viewModel.borrador.value!!.fechaHora)
+
+        viewModel.asociarFotografia(null)
+        assertNotNull("Cancelar la cámara conserva fecha y GPS", viewModel.borrador.value!!.fechaHora)
+
+        viewModel.asociarFotografia(imagen)
+        assertNull(viewModel.borrador.value!!.fechaHora)
+        assertNull(viewModel.borrador.value!!.latitud)
+        assertNull("Sin fecha ni GPS no se guarda", viewModel.guardarRecepcion(parada))
+
+        viewModel.completarFechaUbicacion()
+        viewModel.asociarFirma(imagen)
+        assertNull(viewModel.borrador.value!!.fechaHora)
+        assertNull(viewModel.borrador.value!!.longitud)
+
+        viewModel.completarFechaUbicacion()
+        assertNotNull(viewModel.guardarRecepcion(parada))
     }
 
     @Test
