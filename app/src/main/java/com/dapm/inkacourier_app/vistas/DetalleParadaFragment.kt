@@ -124,7 +124,7 @@ class DetalleParadaFragment : Fragment() {
         mostrarExcepcion(binding.excepcion, recepcion.sectorRiesgo, recepcion.motivoExoneracion, recepcion.notaSeguridad)
     }
 
-    /** Presenta la causa real y deja claro que el pedido sigue sin entregar (HU-05). */
+    /** Muestra el motivo de la visita fallida y el pedido como no entregado (HU-05). */
     private fun mostrarResultadoVisita(visita: VisitaFallida) {
         val causa = visita.causa.orEmpty()
         mostrarAviso(binding.avisoResultado, Tono.ADVERTENCIA, getString(R.string.visita_registrada),

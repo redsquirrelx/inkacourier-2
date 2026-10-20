@@ -33,6 +33,7 @@
     <!-- HU-01: Detalle -->
     <string name="titulo_detalle">Detalle de parada</string>
     <string name="destino_entrega">Destino de la entrega</string>
+    <string name="mapa_referencial">Mapa referencial del destino de la entrega</string>
     <string name="destinataria_titular">Destinatario titular</string>
     <string name="contacto_registrado">Contacto registrado</string>
     <string name="ventana_atencion">Ventana de atención</string>

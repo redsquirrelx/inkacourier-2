@@ -35,7 +35,7 @@ data class VisitaFallida(
         const val RECEPCION_RECHAZADA = "Recepción rechazada"
         const val FALTA_DE_PAGO = "Falta de pago / transacción no verificada"
 
-        /** Ejemplos de motivo documentados en HU-05/CA-03; no constituyen un catálogo exhaustivo. */
+        /** Motivos de ejemplo de HU-05/CA-03; la lista no es completa. */
         val MOTIVOS_RECHAZO = listOf("Pedido duplicado", "Producto no solicitado")
     }
 }

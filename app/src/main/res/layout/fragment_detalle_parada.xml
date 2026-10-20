@@ -57,6 +57,17 @@
                         android:layout_height="wrap_content"
                         android:text="@string/destino_entrega" />
 
+                    <!-- Mapa referencial: imagen ilustrativa hasta integrar un mapa real -->
+                    <com.google.android.material.imageview.ShapeableImageView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/imgMapa"
+                        android:layout_width="match_parent"
+                        android:layout_height="144dp"
+                        android:contentDescription="@string/mapa_referencial"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/img_mapa_referencial"
+                        app:shapeAppearanceOverlay="@style/Forma.Imagen" />
+
                     <include
                         android:id="@+id/datoDestinatario"
                         layout="@layout/view_dato_icono" />

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Mapa referencial ilustrativo del detalle de parada. Se reemplazará por un mapa real
+     cuando se integre la ubicación del destino; mientras tanto los datos son simulados. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="320dp"
+    android:height="144dp"
+    android:viewportWidth="320"
+    android:viewportHeight="144">
+
+    <!-- Fondo -->
+    <path
+        android:fillColor="@color/contenedor_superficie"
+        android:pathData="M0,0 H320 V144 H0 Z" />
+
+    <!-- Manzanas -->
+    <path
+        android:fillColor="#DCE6E1"
+        android:pathData="M12,10 H98 V60 H12 Z M122,10 H218 V60 H122 Z M242,10 H308 V60 H242 Z
+            M12,84 H98 V112 H12 Z M242,84 H308 V112 H242 Z
+            M12,128 H98 V144 H12 Z M122,128 H218 V144 H122 Z M242,128 H308 V144 H242 Z" />
+
+    <!-- Parque -->
+    <path
+        android:fillColor="#CFE5D6"
+        android:pathData="M122,84 H218 V112 H122 Z" />
+
+    <!-- Calles -->
+    <path
+        android:pathData="M0,72 H320 M110,0 V144 M230,0 V144"
+        android:strokeColor="@color/blanco"
+        android:strokeWidth="12" />
+    <path
+        android:pathData="M0,120 H320"
+        android:strokeColor="@color/blanco"
+        android:strokeWidth="8" />
+
+    <!-- Recorrido del repartidor hasta el destino -->
+    <path
+        android:pathData="M110,132 V72 H170 V54"
+        android:strokeColor="@color/primario"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:strokeWidth="4" />
+
+    <!-- Posición del repartidor -->
+    <path
+        android:fillColor="@color/informacion"
+        android:pathData="M104,132 a6,6 0 1,0 12,0 a6,6 0 1,0 -12,0"
+        android:strokeColor="@color/blanco"
+        android:strokeWidth="2" />
+
+    <!-- Marcador del destino -->
+    <path
+        android:fillColor="@color/primario"
+        android:pathData="M170,54 C170,54 156,40 156,29 A14,14 0 1,1 184,29 C184,40 170,54 170,54 Z" />
+    <path
+        android:fillColor="@color/blanco"
+        android:pathData="M164,29 a6,6 0 1,0 12,0 a6,6 0 1,0 -12,0" />
+</vector>
